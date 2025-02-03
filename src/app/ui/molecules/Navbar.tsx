@@ -1,33 +1,37 @@
-// components/Navbar.tsx
 'use client'
-import { useState } from "react";
-import styles from "./Navbar.module.scss";
 
-const Navbar = () => {
-  const [activeTab, setActiveTab] = useState("inventario");
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
-  return (
-    <nav className={styles.navbar}>
-      <button 
-        className={activeTab === "inventario" ? "active" : ""} 
-        onClick={() => setActiveTab("inventario")}
-      >
-        Inventario
-      </button>
-      <button 
-        className={activeTab === "prestamos" ? "active" : ""} 
-        onClick={() => setActiveTab("prestamos")}
-      >
-        Préstamos
-      </button>
-      <button 
-        className={activeTab === "cerrar" ? "active" : ""} 
-        onClick={() => setActiveTab("cerrar")}
-      >
-        Cerrar sesión
-      </button>
-    </nav>
-  );
-};
+export default function Navbar() {
+    const pathname = usePathname()
 
-export default Navbar;
+    const handleLogout = () => {
+        // Lógica de cierre de sesión
+        console.log('Cerrando sesión...')
+    }
+
+    return (
+        <nav className="navbar">
+            <div className="navContainer">
+                <Link
+                    href="/inventario"
+                    className={`navLink ${pathname === '/inventario' ? 'active' : ''}`}
+                >
+                    Inventario
+                </Link>
+
+                <Link
+                    href="/prestamos"
+                    className={`navLink ${pathname === '/prestamos' ? 'active' : ''}`}
+                >
+                    Préstamos
+                </Link>
+
+                <button onClick={handleLogout} className="logoutButton">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </nav>
+    );
+}
