@@ -1,7 +1,7 @@
 //import { getServerSession } from "next-auth/next";
 //import {authOptions}  from "../../api/auth/[...nextauth]/route";
 
-const defaultBaseUrl = "http://localhost:5227/swagger/index.html/api/v1"
+const defaultBaseUrl = "http://localhost:5227/api/v1"
 
 export class HttpClient {
   private baseUrl : string;
