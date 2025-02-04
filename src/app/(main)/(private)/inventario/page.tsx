@@ -9,11 +9,13 @@ export default function DashboardPage() {
     console.log("📦 Producto procesado:", data)
   }
   return (<>
-  <div className=''>
-    <ProductDropdown mode="add" onSubmit={handleProductSubmit}/>
-    <ProductDropdown mode="search" onSubmit={handleProductSubmit}/>
-  </div>
-  <h1>Historial Inventario</h1>
+
+    <ProductDropdown mode="add" onSubmit={handleProductSubmit} />
+
+    <h1 className='title'>Historial Inventario</h1>
+    <ProductDropdown mode="search" onSubmit={handleProductSubmit} />
+
+
     <ListProduct />
   </>
   )

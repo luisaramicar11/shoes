@@ -9,10 +9,10 @@ export default function PrestamosPage() {
     console.log("📦 Producto procesado:", data)
   }
   return (<>
-  <div className=''>
+  <h1 className='title'>Historial Préstamos</h1>
+
     <ProductDropdown mode="search" onSubmit={handleProductSubmit}/>
-  </div>
-  <h1>Historial Préstamos</h1>
+  
     <ListProduct />
   </>
   )

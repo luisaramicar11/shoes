@@ -130,6 +130,8 @@ body {
 // }
 
 .toggleButton {
+  width: 100%;
+  margin: 0 2rem;
   background-color: #7a33cc;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -389,4 +391,12 @@ body {
   background-color: #ff5555;
   color: white;
 }
+}
+
+//pages
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 1rem;
 }
