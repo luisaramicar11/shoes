@@ -35,7 +35,7 @@ body {
   width: 100%;
   background: $background-color;
   box-shadow: $shadow;
-}
+
 
 .navContainer {
   max-width: 900px;
@@ -113,13 +113,14 @@ body {
     padding: 0.75rem 1rem;
   }
 }
+}
 
 // product dropdown
 .containerProduct {
   position: relative;
   max-width: 500px;
   margin: 1rem auto;
-}
+
 
 // .buttonGroup {
 //   display: flex;
@@ -211,25 +212,27 @@ body {
 }
 
 .submitButton {
-  background-color: #7a33cc;
+  background-color: black;
   color: white;
+  padding: 12px;
+  border-radius: 12px;
 }
 
 .cancelButton {
-  background-color: #ff5555;
-  color: white;
+  border-radius: 12px;
+  padding: 12px;
+  background-color: white;
+  border: 2px solid rgb(139, 136, 136);
+  color: black;
+}
 }
 
-
-
-
 // list product
-
 .containerList {
   max-width: 800px;
   margin: 2rem auto;
   padding: 0 1rem;
-}
+
 
 .productItem {
   border: 1px solid #ddd;
@@ -326,7 +329,9 @@ body {
   border-radius: 0.25rem;
   cursor: pointer;
 }
+}
 
+//Modal
 .modalBackdrop {
   position: fixed;
   top: 0;
@@ -338,7 +343,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-}
+
 
 .modalContent {
   background-color: white;
@@ -381,4 +386,5 @@ body {
 .cancelButton {
   background-color: #ff5555;
   color: white;
+}
 }

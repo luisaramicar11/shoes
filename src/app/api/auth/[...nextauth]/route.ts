@@ -5,26 +5,20 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 interface AuthToken {
     id?: string;
-    token?: string;
-    role?: string;
-    photo?: string;
+    jwt?: string;
 }
 
 interface AuthUser {
     id: string;
     email: string;
-    token: string;
-    role: string;
-    photo: string;
+    jwt: string;
 }
 
 export interface CustomSession extends Session {
     user: {
         id?: string;
-        token?: string;
+        jwt?: string;
         email?: string | null;
-        role?: string | null;
-        photo?: string | null;
     }
 }
 
@@ -33,36 +27,32 @@ export const authOptions: NextAuthOptions = {
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                email: {label: "Email", type: "email"},
-                password: {label: "Password", type: "password"},
+                Email: {label: "Email", type: "email"},
+                PasswordHash: {label: "Password", type: "password"},
         },
         authorize: async (credentials) => {
-            if (!credentials?.email  || !credentials?.password) {
+            if (!credentials?.Email || !credentials?.PasswordHash) {
                 console.error("Credenciales faltantes")
                 return null;
         }
             const loginRequest: ILoginRequest = {
-                email: credentials.email,
-                password: credentials.password,
+                Email: credentials.Email,
+                PasswordHash: credentials.PasswordHash,
             }
 
             try {
                 const authService = new AuthService();
                 const response = await authService.login(loginRequest);
-                if (!response.data.access_token) {
+                if (!response.jwt) {
                     console.error("El token de acceso no está presente en la respuesta del login");
                 }
-                const user = response.data.user;
-                if (!user || !response.data.access_token) {
+                const user = response.jwt;
+                if (!user || !response.jwt) {
                     console.error("Datos de usuario o token de acceso faltantes en authorize");
                 }
                 
                 return {
-                    id: (user.sub).toString(),
-                    email: user.email,
-                    role: user.role,
-                    photo: user.photo,
-                    token: response.data.access_token,
+                    jwt: response.jwt,
                 } as AuthUser
             } catch (error) {
                 console.log(error);
@@ -78,23 +68,19 @@ export const authOptions: NextAuthOptions = {
         async jwt({ token, user }) {
             if (user) {
                 const authUser = user as AuthUser;
-                if (!authUser.token) {
+                if (!authUser.jwt) {
                     console.error("El token de usuario es undefined o null");
                 }
                 token.id = authUser.id;
-                token.token = authUser.token;
+                token.token = authUser.jwt;
                 token.email= authUser.email;
-                token.photo = authUser.photo;
-                token.role = authUser.role;
             }
             return token;
         },
         async session({session, token}){
             const customSession = session as CustomSession;
             customSession.user.id = (token as AuthToken).id;
-            customSession.user.token = (token as AuthToken).token;
-            customSession.user.role= (token as AuthToken).role;
-            customSession.user.photo= (token as AuthToken).photo;
+            customSession.user.jwt = (token as AuthToken).jwt;
             return customSession;
     },
 }
