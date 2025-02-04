@@ -77,7 +77,7 @@ export const LoginForm = () => {
 
   return (
     <form
-      className="w-full max-w-sm mx-auto p-4 space-y-4"
+      className="w-full max-w-sm mx-auto p-4 space-y-4 login-form"
       onSubmit={handleSubmit(handleLogin)}
     >
       <h2>Iniciar Sesión</h2>
