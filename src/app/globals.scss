@@ -5,12 +5,13 @@
 //Variables
 $primary-color: #2563eb;
 $secondary-color: #8607a3;
-$hover-color: #1d4ed8;
+$hover-color: #8607a3;
 $text-color: #4b5563;
 $shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 $mobile-breakpoint: 768px;
 $danger-color: #ef4444;
 $background-color: #ffffff;
+$bg-color-btn: #f1f3f3;
 $border-color: #e5e7eb;
 $transition-speed: 0.3s;
 $success-color: #10b981;
@@ -24,7 +25,7 @@ $border-color: #e5e7eb;
 
 body {
   // color: var(--foreground);
-  background: var(--background-color);
+  background: $background-color;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -40,7 +41,7 @@ body {
 .navContainer {
   max-width: 900px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,9 +56,10 @@ body {
 .navLink {
   color: $text-color;
   text-decoration: none;
+  background-color: $bg-color-btn;
   font-weight: 500;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+  padding: 9px 12px;
+  border-radius: 1.5rem;
   transition: all 0.3s ease;
   position: relative;
   font-size: 0.875rem;
@@ -67,7 +69,7 @@ body {
   }
 
   &.active {
-    color: $primary-color;
+    color: $secondary-color;
     font-weight: 600;
 
     &::after {
@@ -76,9 +78,9 @@ body {
       bottom: -8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 24px;
+      width: 50px;
       height: 2px;
-      background: $primary-color;
+      background: $secondary-color;
     }
   }
 
@@ -93,19 +95,19 @@ body {
 }
 
 .logoutButton {
-  background: none;
+  background: $bg-color-btn;
   border: none;
   color: $text-color;
   font-weight: 500;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+  padding: 9px 12px;
+  border-radius: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.875rem;
 
   &:hover {
-    color: #dc2626;
-    background-color: #f8fafc;
+    color: white;
+    background-color: #8607a3;
   }
 
   @media (min-width: $mobile-breakpoint) {
