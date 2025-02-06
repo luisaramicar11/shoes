@@ -49,7 +49,7 @@ export const LoginForm = () => {
         handleError(JSON.parse(result.error))
         return;
       }
-      router.push("/dashboard")
+      router.push("/inventario")
     } catch (error) {
       console.log(error);
     }
@@ -80,7 +80,8 @@ export const LoginForm = () => {
       className="w-full max-w-sm mx-auto p-4 space-y-4 login-form"
       onSubmit={handleSubmit(handleLogin)}
     >
-      <h2>Iniciar Sesión</h2>
+      <h1 className="text-center font-bold text-4xl text-secondary">3T</h1>
+      <p className="text-center font-medium text-lg p-2">Inicia sesión para acceder a tu cuenta</p>
 
       <FormField<ILoginRequest>
         control={control}
@@ -99,7 +100,7 @@ export const LoginForm = () => {
         error={errors.PasswordHash}
         placeholder="Ingresa tu contraseña"
       />
-      <Button>
+      <Button className="bg-secondary w-full text-white">
         Entrar
       </Button>
     </form>
