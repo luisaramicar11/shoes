@@ -1,5 +1,5 @@
 'use client'
-import ListProduct from '@/app/ui/organisms/listProduct/ListProduct'
+import ListProductPrestamo from '@/app/ui/organisms/listProduct/ListProductPrestamo'
 import ProductDropdown from '@/app/ui/organisms/productDropdown/ProductDropdown'
 import React from 'react'
 
@@ -13,7 +13,7 @@ export default function PrestamosPage() {
 
     <ProductDropdown mode="search" onSubmit={handleProductSubmit}/>
   
-    <ListProduct />
+    <ListProductPrestamo />
   </>
   )
 }

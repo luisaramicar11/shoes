@@ -19,42 +19,11 @@ export default function ListProduct() {
   ])
 
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null)
-  const [editingProduct, setEditingProduct] = useState<string | null>(null)
-  const [editedData, setEditedData] = useState<Partial<Producto>>({})
   const [showLendModal, setShowLendModal] = useState<boolean>(false)
   const [lendData, setLendData] = useState<Partial<Producto>>({})
 
   const toggleProduct = (productId: string) => {
     setSelectedProduct(prev => (prev === productId ? null : productId))
-    setEditingProduct(null)
-  }
-
-  const handleEdit = (productId: string, product: Producto) => {
-    setEditingProduct(productId)
-    setEditedData({ ...product })
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, field: string) => {
-    const { value } = e.target
-    setEditedData(prev => ({ ...prev, [field]: value }))
-  }
-
-  const handleTallaChange = (talla: string, cantidad: number) => {
-    setEditedData(prev => ({
-      ...prev,
-      tallas: { ...(prev.tallas || {}), [talla]: cantidad }
-    }))
-  }
-
-  const handleSaveEdit = (productId: string) => {
-    setProductos(prev => prev.map(p => (p.id === productId ? { ...p, ...editedData } : p)))
-    setEditingProduct(null)
-  }
-
-  const handleDeleteProduct = (productId: string) => {
-    setProductos(prev => prev.filter(p => p.id !== productId))
-    setEditingProduct(null)
-    setSelectedProduct(null)
   }
 
   const handleLend = (product: Producto) => {
@@ -73,70 +42,23 @@ export default function ListProduct() {
 
           {selectedProduct === producto.id && (
             <div className="productDetails">
-              {editingProduct === producto.id ? (
-                <>
-                  <div className="detailRow">
-                    <label>Referencia:</label>
-                    <input type="text" value={editedData.referencia} onChange={(e) => handleInputChange(e, 'referencia')} />
+              <div className="detailRow"><span>Referencia:</span><span>{producto.referencia}</span></div>
+              <div className="detailRow"><span>Tipo:</span><span>{producto.tipo}</span></div>
+              <div className="detailRow"><span>Tienda:</span><span>{producto.tienda}</span></div>
+              <div className="tallasSection">
+                <h4>Tallas Disponibles:</h4>
+                {Object.entries(producto.tallas).map(([talla, cantidad]) => (
+                  <div key={talla} className="tallaItem">
+                    <span>{talla}:</span>
+                    <span>{cantidad} unidades</span>
                   </div>
-                  <div className="detailRow">
-                    <label>Tipo:</label>
-                    <select value={editedData.tipo} onChange={(e) => handleInputChange(e, 'tipo')}>
-                      <option value="camiseta">Camiseta</option>
-                      <option value="pantalon">Pantalón</option>
-                      <option value="vestido">Vestido</option>
-                    </select>
-                  </div>
-                  <div className="detailRow">
-                    <label>Tienda:</label>
-                    <select value={editedData.tienda} onChange={(e) => handleInputChange(e, 'tienda')}>
-                      <option value="SportCenter">SportCenter</option>
-                      <option value="tienda-1">Tienda 1</option>
-                      <option value="tienda-2">Tienda 2</option>
-                      <option value="tienda-3">Tienda 3</option>
-                    </select>
-                  </div>
-
-                  <div className="tallasSection">
-                    <h4>Tallas Disponibles:</h4>
-                    {Object.entries(producto.tallas).map(([talla, cantidad]) => (
-                      <div key={talla} className="tallaItem">
-                        <span>{talla}:</span>
-                        <input
-                          type="number"
-                          min="0"
-                          value={editedData.tallas?.[talla] || 0}
-                          onChange={(e) => handleTallaChange(talla, parseInt(e.target.value))}
-                        />
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="buttonGroup">
-                    <button onClick={() => handleSaveEdit(producto.id)} className="saveButton">Guardar</button>
-                    <button onClick={() => handleDeleteProduct(producto.id)} className="deleteButton">Eliminar</button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="detailRow"><span>Referencia:</span><span>{producto.referencia}</span></div>
-                  <div className="detailRow"><span>Tipo:</span><span>{producto.tipo}</span></div>
-                  <div className="detailRow"><span>Tienda:</span><span>{producto.tienda}</span></div>
-                  <div className="tallasSection">
-                    <h4>Tallas Disponibles:</h4>
-                    {Object.entries(producto.tallas).map(([talla, cantidad]) => (
-                      <div key={talla} className="tallaItem">
-                        <span>{talla}:</span>
-                        <span>{cantidad} unidades</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="buttonGroup">
-                    <button onClick={() => handleEdit(producto.id, producto)} className="editButton">Editar</button>
-                    <button onClick={() => handleLend(producto)} className="lendButton">Prestar</button>
-                  </div>
-                </>
-              )}
+                ))}
+              </div>
+              <div className="buttonGroupPrestamo">
+                <button className="saveButton">Regresar a 3T</button>
+                <button className="editButton">Confirmar pago</button>
+                <button onClick={() => handleLend(producto)} className="lendButton">Prestar</button>
+              </div>
             </div>
           )}
         </div>
@@ -146,8 +68,6 @@ export default function ListProduct() {
     </div>
   )
 }
-
-
 
 const LendModal = ({ product, onClose }: { product: Partial<Producto>, onClose: () => void }) => {
   const [formData, setFormData] = useState<{
@@ -160,7 +80,6 @@ const LendModal = ({ product, onClose }: { product: Partial<Producto>, onClose: 
     tiendaOrigen: product.tienda || ''
   })
 
-  // Inicializar tallas cuando cambia el producto
   useEffect(() => {
     if (product.tallas) {
       const initialTallas = Object.keys(product.tallas).reduce((acc, talla) => {
