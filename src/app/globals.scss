@@ -308,6 +308,14 @@ body {
   margin-top: 1.5rem;
 }
 
+.buttonGroupPrestamo{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+}
+
 .editButton {
   background-color: #28a745;
   color: white;
@@ -320,10 +328,12 @@ body {
 .saveButton {
   background-color: #007bff;
   padding: 0.5rem 1rem;
+  color: white;
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
 }
+
 .deleteButton {
   background-color: #dc3545;
   padding: 0.5rem 1rem;
@@ -351,6 +361,7 @@ body {
 }
 
 //Modal
+
 .modalBackdrop {
   position: fixed;
   top: 0;
@@ -381,6 +392,29 @@ body {
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
+}
+.tallaItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.cantidadInput {
+  width: 60px;
+  padding: 0.25rem;
+}
+
+.disponible {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.readOnlyInput {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 0.3rem;
+  border-radius: 9px;
 }
 
 .formGroup {
