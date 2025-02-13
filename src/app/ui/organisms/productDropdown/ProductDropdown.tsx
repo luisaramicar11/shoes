@@ -21,7 +21,7 @@ export default function ProductDropdown({ mode, existingProducts = [], onSubmit,
     tallas: {} as TallasType,
   })
 
-  const tallasDisponibles = ['S', 'M', 'L', 'XL', 'XXL']
+  const tallasDisponibles = ['36','37', '38','39', '40', '41', '42', '43', '44', '45']
 
   const handleToggle = () => setIsOpen(!isOpen)
 
