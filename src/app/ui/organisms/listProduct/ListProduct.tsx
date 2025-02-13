@@ -13,9 +13,9 @@ type Producto = {
 
 export default function ListProduct() {
   const [productos, setProductos] = useState<Producto[]>([
-    { id: '1', nombre: 'Camiseta Básica', referencia: 'REF-001', tipo: 'camiseta', tienda: 'SportCenter', tallas: { S: 5, M: 3 } },
-    { id: '2', nombre: 'Pantalón Clásico', referencia: 'REF-002', tipo: 'pantalon', tienda: 'SportCenter', tallas: { M: 4, L: 2 } },
-    { id: '3', nombre: 'Vestido Elegante', referencia: 'REF-003', tipo: 'vestido', tienda: 'SportCenter', tallas: { S: 3, M: 5, XL: 2 } }
+    { id: '1', nombre: 'Zapato', referencia: 'REF-001', tipo: 'camiseta', tienda: '3t', tallas: { 32: 5, 34: 13, 38: 9, 40: 8 } },
+    { id: '2', nombre: 'Zapato', referencia: 'REF-002', tipo: 'pantalon', tienda: '3t', tallas: {32: 5, 34: 13, 38: 9, 40: 8 } },
+    { id: '3', nombre: 'Zapato', referencia: 'REF-003', tipo: 'vestido', tienda: '3t', tallas: { 32: 5, 34: 13, 38: 9, 40: 8 } }
   ])
 
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null)
@@ -79,14 +79,14 @@ export default function ListProduct() {
                     <label>Referencia:</label>
                     <input type="text" value={editedData.referencia} onChange={(e) => handleInputChange(e, 'referencia')} />
                   </div>
-                  <div className="detailRow">
+                  {/* <div className="detailRow">
                     <label>Tipo:</label>
                     <select value={editedData.tipo} onChange={(e) => handleInputChange(e, 'tipo')}>
-                      <option value="camiseta">Camiseta</option>
-                      <option value="pantalon">Pantalón</option>
-                      <option value="vestido">Vestido</option>
+                      <option value="camiseta">zapato</option>
+                      <option value="pantalon">teni</option>
+                      <option value="vestido">bota</option>
                     </select>
-                  </div>
+                  </div> */}
                   <div className="detailRow">
                     <label>Tienda:</label>
                     <select value={editedData.tienda} onChange={(e) => handleInputChange(e, 'tienda')}>
@@ -120,7 +120,6 @@ export default function ListProduct() {
               ) : (
                 <>
                   <div className="detailRow"><span>Referencia:</span><span>{producto.referencia}</span></div>
-                  <div className="detailRow"><span>Tipo:</span><span>{producto.tipo}</span></div>
                   <div className="detailRow"><span>Tienda:</span><span>{producto.tienda}</span></div>
                   <div className="tallasSection">
                     <h4>Tallas Disponibles:</h4>

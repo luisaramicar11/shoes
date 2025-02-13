@@ -12,10 +12,12 @@ type Producto = {
 }
 
 export default function ListProduct() {
+
+
   const [productos, setProductos] = useState<Producto[]>([
-    { id: '1', nombre: 'Camiseta Básica', referencia: 'REF-001', tipo: 'camiseta', tienda: 'SportCenter', tallas: { S: 5, M: 3 } },
-    { id: '2', nombre: 'Pantalón Clásico', referencia: 'REF-002', tipo: 'pantalon', tienda: 'SportCenter', tallas: { M: 4, L: 2 } },
-    { id: '3', nombre: 'Vestido Elegante', referencia: 'REF-003', tipo: 'vestido', tienda: 'SportCenter', tallas: { S: 3, M: 5, XL: 2 } }
+    { id: '1', nombre: 'Préstamo 1', referencia: 'REF-001', tipo: 'camiseta', tienda: 'SportCenter', tallas: { 32: 1,} },
+    { id: '2', nombre: 'Préstamo 2', referencia: 'REF-002', tipo: 'pantalon', tienda: 'SportCenter', tallas: { 34: 1,} },
+    { id: '3', nombre: 'Préstamo 3', referencia: 'REF-003', tipo: 'vestido', tienda: 'SportCenter', tallas: { 38: 1,} }
   ])
 
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null)
@@ -43,7 +45,6 @@ export default function ListProduct() {
           {selectedProduct === producto.id && (
             <div className="productDetails">
               <div className="detailRow"><span>Referencia:</span><span>{producto.referencia}</span></div>
-              <div className="detailRow"><span>Tipo:</span><span>{producto.tipo}</span></div>
               <div className="detailRow"><span>Tienda:</span><span>{producto.tienda}</span></div>
               <div className="tallasSection">
                 <h4>Tallas Disponibles:</h4>
@@ -86,7 +87,7 @@ const LendModal = ({ product, onClose }: { product: Partial<Producto>, onClose: 
         acc[talla] = 0
         return acc
       }, {} as Record<string, number>)
-      
+
       setFormData(prev => ({
         ...prev,
         tallas: initialTallas,
@@ -97,7 +98,7 @@ const LendModal = ({ product, onClose }: { product: Partial<Producto>, onClose: 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
-    
+
     if (name === 'tiendaDestino') {
       setFormData(prev => ({ ...prev, tiendaDestino: value }))
     } else {
@@ -122,7 +123,7 @@ const LendModal = ({ product, onClose }: { product: Partial<Producto>, onClose: 
       <div className="modalContent">
         <h3>Prestar producto</h3>
         <button onClick={onClose} className="modalClose">✖</button>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="detailRow">
             <label>Tienda origen:</label>
@@ -181,3 +182,7 @@ const LendModal = ({ product, onClose }: { product: Partial<Producto>, onClose: 
     </div>
   )
 }
+
+
+
+

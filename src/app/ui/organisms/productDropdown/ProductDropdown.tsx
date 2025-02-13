@@ -70,7 +70,7 @@ export default function ProductDropdown({ mode, existingProducts = [], onSubmit,
     <div className="containerProduct">
       <div className="buttonGroup">
         <button onClick={() => { setIsOpen(true); setFormData({ referencia: '', tipo: '', tienda: '', tallas: {} }) }} className="toggleButton">
-          {isOpen ? 'Cerrar Formulario' : mode === 'add' ? 'Agregar Producto' : 'Buscar Producto'}
+          {isOpen ? 'Cerrar Formulario' : mode === 'add' ? 'Agregar Producto' : 'Buscar'}
         </button>
       </div>
 
@@ -88,7 +88,7 @@ export default function ProductDropdown({ mode, existingProducts = [], onSubmit,
             </select>
           </div>
 
-          <div className="formGroup">
+          {/* <div className="formGroup">
             <label>Tipo:</label>
             <select name="tipo" value={formData.tipo} onChange={handleInputChange}>
               <option value="">Seleccione tipo</option>
@@ -96,7 +96,7 @@ export default function ProductDropdown({ mode, existingProducts = [], onSubmit,
               <option value="pantalon">Pantalón</option>
               <option value="vestido">Vestido</option>
             </select>
-          </div>
+          </div> */}
 
           <div className="formGroup">
             <label>Tienda:</label>
